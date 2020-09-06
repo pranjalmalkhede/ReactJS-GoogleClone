@@ -95,11 +95,17 @@ const SearchPage = () => {
               </div>
             ))
           ) : (
-            <p>
-              Quota exceeded for quota metric 'Queries' and limit 'Queries per
-              day' of service 'customsearch.googleapis.com' for consumer
-              'project_number:619471531282'
-            </p>
+            <>
+              <p>
+                Daily quota for google searches exceeded. Try again tomorrow
+              </p>
+              <br />
+              <p>
+                Quota exceeded for quota metric 'Queries' and limit 'Queries per
+                day' of service 'customsearch.googleapis.com' for consumer
+                'project_number:619471531282'
+              </p>
+            </>
           )}
         </div>
       )}
