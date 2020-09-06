@@ -66,8 +66,12 @@ const SearchPage = () => {
           {data ? (
             data?.items.map((item, index) => (
               <div key={index} className="searchPage__result">
-                <a href={item.link} className="searchPage__resultLink">
-                  {item.pagemap?.cse_image?.length > 0 &&
+                <a
+                  href={item.link}
+                  target="blank"
+                  className="searchPage__resultLink"
+                >
+                  {/* {item.pagemap?.cse_image?.length > 0 &&
                     item.pagemap?.cse_image[0]?.src && (
                       <img
                         className="searchPage__resultImage"
@@ -76,12 +80,16 @@ const SearchPage = () => {
                           item.pagemap?.cse_image[0]?.src
                         }
                       />
-                    )}
+                    )} */}
 
                   {item.displayLink}
                 </a>
-                <a href={item.link} className="searchPage__resultTitle ">
-                  <h2>{item.title}</h2>
+                <a
+                  href={item.link}
+                  target="blank"
+                  className="searchPage__resultTitle "
+                >
+                  <h2 className="searchPage__resultLinkTitle">{item.title}</h2>
                 </a>
                 <p className="searchPage__resultSnippet">{item.snippet}</p>
               </div>
