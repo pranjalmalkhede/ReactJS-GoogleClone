@@ -8,7 +8,7 @@ import { useStateValue } from "../utils/StateProvider";
 import { actionTypes } from "../utils/reducer";
 
 const Search = ({ hideButtons = false }) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [input, setInput] = useState("");
   const history = useHistory();
 
@@ -16,6 +16,9 @@ const Search = ({ hideButtons = false }) => {
     e.preventDefault();
 
     if (input.trim() !== "") {
+      dispatch({
+        type:actionTypes.SET_LOADING
+      })
       dispatch({
         type: actionTypes.SET_SEARCH_TERM,
         term: input,
@@ -33,7 +36,7 @@ const Search = ({ hideButtons = false }) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <img src={MicIcon} className="search__micicon" />
+        <img src={MicIcon} alt="mic" className="search__micicon" />
         {/* <MicIcon  /> */}
       </div>
       {!hideButtons ? (

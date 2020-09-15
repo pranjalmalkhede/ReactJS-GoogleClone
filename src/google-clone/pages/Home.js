@@ -23,7 +23,7 @@ const Home = () => {
       </div>
 
       <div className="home__body">
-        <img src={Google} />
+        <img src={Google} alt="google logo"/>
         <div className="home__inputContainer">
           <Search />
         </div>

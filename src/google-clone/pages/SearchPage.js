@@ -1,7 +1,7 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "./SearchPage.css";
 import { useStateValue } from "../utils/StateProvider";
-import useGoogleSearch from "../utils/useGoogleSearch";
+// import useGoogleSearch from "../utils/useGoogleSearch";
 import { Link } from "react-router-dom";
 import Google from "../assets/google.png";
 import Search from "../components/Search";
@@ -11,17 +11,46 @@ import ImageIcon from "@material-ui/icons/Image";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import RoomIcon from "@material-ui/icons/Room";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import GoogleResponse from "../utils/googleResponse";
+import { actionTypes } from "../utils/reducer";
+
+// import GoogleResponse from "../utils/googleResponse";
 
 const SearchPage = () => {
-  const [{ term }, dispatch] = useStateValue();
-  const { data } = useGoogleSearch(term);
+  const [{ term,data ,...rest}, dispatch] = useStateValue();
+  // useGoogleSearch(term);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      fetch(
+        `https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_API_KEY}&cx=${process.env.REACT_APP_GOOGLE_CONTEXT_KEY}&q=${term}`
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          if (!result.error && result.searchInformation.totalResults!=='0') {
+            dispatch({type:actionTypes.SET_DATA,
+            payload:result})
+          }
+          else {
+            dispatch({
+              type:actionTypes.SET_ERROR
+            })
+          }
+         
+         
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+    };
+    fetchData();
+  }, [term]);
+
 
   return (
     <div className="searchPage">
       <div className="searchPage__header">
         <Link to="/google">
-          <img src={Google} className="searchPage__logo" />
+          <img src={Google} alt="google logo" className="searchPage__logo" />
         </Link>
         <div className="searchPage__headerBody">
           <Search hideButtons />
@@ -62,13 +91,13 @@ const SearchPage = () => {
             {data?.searchInformation.formattedSearchTime}
             seconds for {term}
           </p>
-
-          {data ? (
+          {rest.loading && <h3>loading</h3>}
+          {!rest.loading && data &&  data ? (
             data?.items.map((item, index) => (
               <div key={index} className="searchPage__result">
                 <a
                   href={item.link}
-                  target="blank"
+                  // target="blank"
                   className="searchPage__resultLink"
                 >
                   {/* {item.pagemap?.cse_image?.length > 0 &&
@@ -86,7 +115,7 @@ const SearchPage = () => {
                 </a>
                 <a
                   href={item.link}
-                  target="blank"
+                  // target="blank"
                   className="searchPage__resultTitle "
                 >
                   <h2 className="searchPage__resultLinkTitle">{item.title}</h2>
@@ -96,6 +125,8 @@ const SearchPage = () => {
             ))
           ) : (
             <>
+              {!rest.loading && rest.error && (
+              <>
               <p>
                 Daily quota for google searches exceeded. Try again tomorrow
               </p>
@@ -105,6 +136,8 @@ const SearchPage = () => {
                 day' of service 'customsearch.googleapis.com' for consumer
                 'project_number:619471531282'
               </p>
+              </>
+              )}
             </>
           )}
         </div>
