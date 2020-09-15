@@ -18,7 +18,7 @@ const Home = () => {
           <Link>Gmail</Link>
           <Link>Images</Link>
           <AppsIcon />
-          <Avatar />
+          <Avatar src="https://lh3.googleusercontent.com/ogw/ADGmqu9HqRH8APSPBzksK5fZwZhsM3fB1RG-0as6gcqs=s83-c-mo" alt="pranjal malkhede" />
         </div>
       </div>
 
