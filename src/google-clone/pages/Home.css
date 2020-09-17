@@ -43,7 +43,7 @@
 
 .home__body > img {
   object-fit: contain;
-  height: 100px;
+  height: 120px;
 }
 
 @media (max-width: 415px) {
@@ -53,6 +53,6 @@
   }
 
   .home__body > img {
-    height: 75px;
+    height: 90px;
   }
 } 

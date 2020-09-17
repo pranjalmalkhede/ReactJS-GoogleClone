@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 import AppsIcon from "@material-ui/icons/Apps";
 import { Avatar } from "@material-ui/core";
 import Search from "../components/Search";
-import Google from "../assets/google.png";
+import Google from "../assets/google.gif";
 
 const Home = () => {
   return (
     <div className="home">
       <div className="home__header">
         <div className="home__headerLeft">
-          <Link>About</Link>
-          <Link>Store</Link>
+          {/* <Link>About</Link>
+          <Link>Store</Link> */}
         </div>
         <div className="home__headerRight">
           <Link>Gmail</Link>
@@ -22,7 +22,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="home__body">
+      <div className="home__body"> 
         <img src={Google} alt="google logo"/>
         <div className="home__inputContainer">
           <Search />
