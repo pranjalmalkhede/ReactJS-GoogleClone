@@ -3,7 +3,7 @@ import "./SearchPage.css";
 import { useStateValue } from "../utils/StateProvider";
 // import useGoogleSearch from "../utils/useGoogleSearch";
 import { Link } from "react-router-dom";
-import Google from "../assets/google.png";
+// import Google from "../assets/google.png";
 import Search from "../components/Search";
 import SearchIcon from "@material-ui/icons/Search";
 import DescriptionIcon from "@material-ui/icons/Description";
@@ -43,14 +43,14 @@ const SearchPage = () => {
         });
     };
     fetchData();
-  }, [term]);
+  }, [term,dispatch]);
 
 
   return (
     <div className="searchPage">
       <div className="searchPage__header">
         <Link to="/google">
-          <img src={Google} alt="google logo" className="searchPage__logo" />
+          <img src={"https://firebasestorage.googleapis.com/v0/b/react-f6828.appspot.com/o/google-clone%2Fgoogle.png?alt=media&token=01c781e4-cdef-466c-b4ca-ad1442ecb976"} alt="google logo" className="searchPage__logo" />
         </Link>
         <div className="searchPage__headerBody">
           <Search hideButtons />
