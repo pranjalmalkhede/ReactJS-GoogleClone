@@ -3,7 +3,7 @@ import "./SearchPage.css";
 import { useStateValue } from "../utils/StateProvider";
 // import useGoogleSearch from "../utils/useGoogleSearch";
 import { Link } from "react-router-dom";
-// import Google from "../assets/google.png";
+import Google from "../assets/google.png";
 import Search from "../components/Search";
 import SearchIcon from "@material-ui/icons/Search";
 import DescriptionIcon from "@material-ui/icons/Description";
@@ -26,7 +26,8 @@ const SearchPage = () => {
       )
         .then((response) => response.json())
         .then((result) => {
-          if (!result.error && result.searchInformation.totalResults!=='0') {
+          // console.log(result)
+          if (!result.error && result.searchInformation.formattedTotalResults!=='0') {
             dispatch({type:actionTypes.SET_DATA,
             payload:result})
           }
@@ -45,12 +46,13 @@ const SearchPage = () => {
     fetchData();
   }, [term,dispatch]);
 
+  // console.log(data)
 
   return (
     <div className="searchPage">
       <div className="searchPage__header">
         <Link to="/google">
-          <img src={"https://firebasestorage.googleapis.com/v0/b/react-f6828.appspot.com/o/google-clone%2Fgoogle.png?alt=media&token=01c781e4-cdef-466c-b4ca-ad1442ecb976"} alt="google logo" className="searchPage__logo" />
+          <img src={Google} alt="google logo" className="searchPage__logo" />
         </Link>
         <div className="searchPage__headerBody">
           <Search hideButtons />
@@ -100,18 +102,7 @@ const SearchPage = () => {
                   // target="blank"
                   className="searchPage__resultLink"
                 >
-                  {/* {item.pagemap?.cse_image?.length > 0 &&
-                    item.pagemap?.cse_image[0]?.src && (
-                      <img
-                        className="searchPage__resultImage"
-                        src={
-                          item.pagemap?.cse_image?.length > 0 &&
-                          item.pagemap?.cse_image[0]?.src
-                        }
-                      />
-                    )} */}
-
-                  {item.displayLink}
+                 {item.displayLink}
                 </a>
                 <a
                   href={item.link}
@@ -128,13 +119,7 @@ const SearchPage = () => {
               {!rest.loading && rest.error && (
               <>
               <p>
-                Daily quota for google searches exceeded. Try again tomorrow
-              </p>
-              <br />
-              <p>
-                Quota exceeded for quota metric 'Queries' and limit 'Queries per
-                day' of service 'customsearch.googleapis.com' for consumer
-                'project_number:619471531282'
+                <strong>Try again</strong>
               </p>
               </>
               )}

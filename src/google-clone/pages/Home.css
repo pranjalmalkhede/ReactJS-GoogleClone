@@ -55,4 +55,8 @@
   .home__body > img {
     height: 90px;
   }
+
+  .home__header {
+    padding: 20px 20px;
+  }
 } 

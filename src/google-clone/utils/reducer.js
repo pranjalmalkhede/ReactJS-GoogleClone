@@ -32,7 +32,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SET_ERROR:return {
       ...state,
       error:true,
-      loading:false
+      loading:false,
+      data:null
     }
     default:
       return state;
